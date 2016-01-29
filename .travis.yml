@@ -15,6 +15,7 @@ matrix:
 before_script:
   - echo $TRAVIS_PHP_VERSION
   - if [[ $TRAVIS_PHP_VERSION =~ ^PHP ]]; then echo 'disabling'; phpenv config-rm xdebug.ini; fi
+  - ( set -o posix ; set )
 
 script:
   - ./lets_probe.php

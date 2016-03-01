@@ -19,6 +19,7 @@ before_script:
   - if [[ $TRAVIS_PHP_VERSION =~ ^[0-9]+[.][0-9]+$ ]]; then echo 'disabling'; phpenv config-rm xdebug.ini; fi
   - ( set -o posix ; set )
   - ls -al
+  - ls -al /usr/bin
   - ls -al /usr/local/bin
   - chmod +x ./lets_probe.php
 

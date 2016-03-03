@@ -20,7 +20,7 @@ before_script:
   - if [[ $TRAVIS_PHP_VERSION =~ ^[0-9]+[.][0-9]+$ ]]; then echo 'disabling XDebug'; phpenv config-rm xdebug.ini; fi
   - composer self-update
   - composerPath=`composer --help | grep 'php .*composer.* help list' | grep -Po '[^ ]+composer'`
-  - php -define memory-limit=512M $composerPath --help
+  - php -d memory-limit=512M $composerPath --help
   - ( set -o posix ; set )
   - ls -al
   - ls -al /usr/bin

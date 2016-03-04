@@ -21,6 +21,7 @@ before_script:
   - composer self-update
   - composerPath=`composer --help | grep 'php .*composer.* help list' | grep -Po '[^ ]+composer'`
   - php -d memory-limit=512M $composerPath --help
+  - php /home/travis/.phpenv/versions/$TRAVIS_PHP_VERSION/bin/composer --help
   - ( set -o posix ; set )
   - ls -al
   - ls -al /usr/bin

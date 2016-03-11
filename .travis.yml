@@ -17,12 +17,14 @@ matrix:
 before_script:
   - echo $TRAVIS_PHP_VERSION
   - echo $(php -r 'echo PHP_VERSION;' | grep -E '[0-9]+[.][0-9]+[.][0-9]+' -o)
-  - if [[ $TRAVIS_PHP_VERSION =~ ^[0-9]+[.][0-9]+$ ]]; then echo 'disabling XDebug'; phpenv config-rm xdebug.ini; fi
+  - if [[ $TRAVIS_PHP_VERSION =~ ^[0-9]+[.][0-9]+$ ]];
+      then echo 'disabling XDebug';
+      phpenv config-rm xdebug.ini;
+      echo "memory_limit=2G" >> ~/.phpenv/versions/$TRAVIS_PHP_VERSION/etc/conf.d/travis.ini;
+      php -r 'echo ini_get("memory_limit");';
+  fi
   - composer self-update
   - composerPath=`composer --help | grep 'php .*composer.* help list' | grep -Po '[^ ]+composer'`
-  - php -d memory-limit=2G -r 'echo ini_get("memory_limit");' # does it changed?
-  - php -dmemory-limit=2G -r 'echo ini_get("memory_limit");' # and this?
-  - php -d memory-limit=512M $composerPath --help
   - php /home/travis/.phpenv/versions/$TRAVIS_PHP_VERSION/bin/composer --help
   - ( set -o posix ; set )
   - ls -al
